@@ -14,10 +14,6 @@ services:
           name: gatornest-db
           property: connectionString
     plan: free
-    disk:
-      name: gatornest-disk
-      mountPath: /data
-      sizeGB: 1
 
 databases:
   - name: gatornest-db
