@@ -46,7 +46,7 @@ type Student struct {
 	LangPref       LanguagePreference `json:"language_preference"`
 	Address        string             `json:"address"`
 	University     string             `json:"university"`
-	StudentID      string             `json:"student_id" gorm:"unique"`
+	StudentID      string             `json:"student_id" gorm:"unique;default:null"`
 	PendingPayment float64            `json:"pending_payment" gorm:"default:1250.00"`
 	PendingDues    float64            `json:"pending_dues" gorm:"default:10"`
 }
