@@ -19,13 +19,14 @@ func main() {
 	r := gin.Default()
 
 	// CORS configuration
-	corsConfig := cors.DefaultConfig()
-	corsConfig.AllowAllOrigins = true
-	corsConfig.AllowMethods = []string{"GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"}
-	corsConfig.AllowHeaders = []string{"Origin", "Content-Type", "Authorization", "Accept", "X-Requested-With"}
-	corsConfig.ExposeHeaders = []string{"Content-Length", "Authorization"}
-	corsConfig.AllowCredentials = true
-	corsConfig.MaxAge = 12 * time.Hour
+	corsConfig := cors.Config{
+		AllowOrigins:     []string{"https://gatornest.netlify.app"},
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+		MaxAge:           12 * time.Hour,
+	}
 
 	// Apply CORS middleware
 	r.Use(cors.New(corsConfig))
