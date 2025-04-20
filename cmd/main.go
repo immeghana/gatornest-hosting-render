@@ -18,15 +18,17 @@ import (
 func main() {
 	r := gin.Default()
 
-	// Custom CORS Middleware
-	r.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"https://gatornest.netlify.app", "http://localhost:5173"},
-		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
-		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
-		ExposeHeaders:    []string{"Content-Length", "Authorization"},
-		AllowCredentials: true,
-		MaxAge:           12 * time.Hour,
-	}))
+	// CORS configuration
+	corsConfig := cors.DefaultConfig()
+	corsConfig.AllowAllOrigins = true
+	corsConfig.AllowMethods = []string{"GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"}
+	corsConfig.AllowHeaders = []string{"Origin", "Content-Type", "Authorization", "Accept", "X-Requested-With"}
+	corsConfig.ExposeHeaders = []string{"Content-Length", "Authorization"}
+	corsConfig.AllowCredentials = true
+	corsConfig.MaxAge = 12 * time.Hour
+
+	// Apply CORS middleware
+	r.Use(cors.New(corsConfig))
 
 	config.ConnectDatabase()
 
