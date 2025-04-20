@@ -2,7 +2,6 @@ package config
 
 import (
 	"backend/internal/entity"
-	"backend/internal/migration"
 	"fmt"
 	"os"
 
@@ -24,9 +23,12 @@ func ConnectDatabase() {
 		panic("Failed to connect to database!")
 	}
 
-	// Run migrations
-	if err := migration.RunMigrations(); err != nil {
-		fmt.Printf("Error running migrations: %v\n", err)
+	// Run migration to alter student_id column
+	if err := DB.Exec("ALTER TABLE students ALTER COLUMN student_id DROP NOT NULL").Error; err != nil {
+		fmt.Printf("Error altering student_id column: %v\n", err)
+	}
+	if err := DB.Exec("CREATE UNIQUE INDEX IF NOT EXISTS idx_students_student_id_not_null ON students (student_id) WHERE student_id IS NOT NULL").Error; err != nil {
+		fmt.Printf("Error creating unique index: %v\n", err)
 	}
 
 	// Auto-migrate with new fields
