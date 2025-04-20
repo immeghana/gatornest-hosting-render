@@ -20,9 +20,9 @@ func main() {
 
 	// Custom CORS Middleware
 	r.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"*"}, // Frontend URL
-		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE"},
-		AllowHeaders:     []string{"Content-Type", "Authorization"},
+		AllowOrigins:     []string{"https://gatornest.netlify.app", "http://localhost:5173"},
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
 		ExposeHeaders:    []string{"Content-Length", "Authorization"},
 		AllowCredentials: true,
 		MaxAge:           12 * time.Hour,
