@@ -84,7 +84,7 @@ func (r *roomRepository) JoinRoom(roomID uint, studentID uint) error {
 	}
 
 	// Check if room is full
-	if room.StudentsEnrolled >= room.Capacity {
+	if room.Vacancy <= 0 {
 		tx.Rollback()
 		return errors.New("room is full")
 	}
@@ -111,7 +111,7 @@ func (r *roomRepository) JoinRoom(roomID uint, studentID uint) error {
 	// Increment students enrolled and decrease vacancy
 	if err := tx.Model(&room).Updates(map[string]interface{}{
 		"students_enrolled": room.StudentsEnrolled + 1,
-		"vacancy":           room.Capacity - (room.StudentsEnrolled + 1),
+		"vacancy":           room.Vacancy - 1,
 	}).Error; err != nil {
 		tx.Rollback()
 		return err

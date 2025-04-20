@@ -70,7 +70,7 @@ func TestCreateRoom(t *testing.T) {
 		RoomNumber: "101",
 		Type:       "2B2B",
 		Price:      1000.00,
-		Capacity:   2,
+		Vacancy:   2,
 	}
 
 	reqBody, _ := json.Marshal(room)
@@ -103,14 +103,14 @@ func TestGetRooms(t *testing.T) {
 			RoomNumber:       "101",
 			Type:             "2B2B",
 			Price:            1000.00,
-			Capacity:         2,
+			Vacancy:         2,
 			StudentsEnrolled: 1,
 		},
 		{
 			RoomNumber:       "102",
 			Type:             "1B1B",
 			Price:            800.00,
-			Capacity:         1,
+			Vacancy:         1,
 			StudentsEnrolled: 0,
 		},
 	}
@@ -163,7 +163,7 @@ func TestGetRoomsByType(t *testing.T) {
 			RoomNumber:       "101",
 			Type:             "2B2B",
 			Price:            1000.00,
-			Capacity:         2,
+			Vacancy:         2,
 			StudentsEnrolled: 1,
 		},
 	}

@@ -10,5 +10,5 @@ type Room struct {
 	Price            float64   `json:"price"`
 	Students         []Student `json:"students" gorm:"many2many:room_students"`
 	StudentsEnrolled int       `json:"students_enrolled"`
-	Capacity         int       `json:"vacancy"`
+	Vacancy          int       `json:"vacancy"`
 }
