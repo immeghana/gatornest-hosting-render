@@ -2,7 +2,7 @@ services:
   - type: web
     name: gatornest-backend
     env: go
-    buildCommand: go mod download && go build -o main
+    buildCommand: cd cmd && go mod download && go build -o main
     startCommand: ./main
     envVars:
       - key: GIN_MODE
