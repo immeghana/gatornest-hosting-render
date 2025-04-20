@@ -29,24 +29,24 @@ type Student struct {
 	CreatedAt      time.Time          `json:"created_at"`
 	UpdatedAt      time.Time          `json:"updated_at"`
 	DeletedAt      *time.Time         `gorm:"index" json:"deleted_at,omitempty"`
-	Name           string             `json:"name" binding:"required"`
-	Email          string             `json:"email" gorm:"unique;not null" binding:"required,email"`
+	Name           string             `json:"name" binding:"required" validate:"required"`
+	Email          string             `json:"email" gorm:"unique;not null" binding:"required,email" validate:"required,email"`
 	RoomID         *uint              `json:"room_id"`
-	Phone          string             `json:"phone,omitempty" binding:"required"`
-	DormPreference string             `json:"dorm_preference,omitempty" binding:"required"`
-	Password       string             `json:"password" binding:"required,min=6"`
-	Gender         string             `json:"gender,omitempty" binding:"required"`
-	Age            int                `json:"age,omitempty" binding:"required,min=18"`
-	Major          string             `json:"major,omitempty" binding:"required"`
-	LanguageSpoken string             `json:"language_spoken,omitempty" binding:"required"`
-	Preference     Preference         `json:"preference,omitempty" binding:"required"`
-	Cleanliness    Cleanliness        `json:"cleanliness,omitempty" binding:"required"`
-	FoodPref       FoodPreference     `json:"food_preference,omitempty" binding:"required"`
-	PeopleOver     PeopleOver         `json:"people_over,omitempty" binding:"required"`
-	LangPref       LanguagePreference `json:"language_preference,omitempty" binding:"required"`
-	Address        string             `json:"address" binding:"required"`
-	University     string             `json:"university" binding:"required"`
-	StudentID      string             `json:"student_id" gorm:"unique;not null" binding:"required"`
+	Phone          string             `json:"phone" binding:"required" validate:"required"`
+	DormPreference string             `json:"dorm_preference" binding:"required" validate:"required"`
+	Password       string             `json:"password" binding:"required" validate:"required"`
+	Gender         string             `json:"gender"`
+	Age            int                `json:"age"`
+	Major          string             `json:"major"`
+	LanguageSpoken string             `json:"language_spoken"`
+	Preference     Preference         `json:"preference"`
+	Cleanliness    Cleanliness        `json:"cleanliness"`
+	FoodPref       FoodPreference     `json:"food_preference"`
+	PeopleOver     PeopleOver         `json:"people_over"`
+	LangPref       LanguagePreference `json:"language_preference"`
+	Address        string             `json:"address"`
+	University     string             `json:"university"`
+	StudentID      string             `json:"student_id" gorm:"unique"`
 	PendingPayment float64            `json:"pending_payment" gorm:"default:1250.00"`
 	PendingDues    float64            `json:"pending_dues" gorm:"default:10"`
 }
