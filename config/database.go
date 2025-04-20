@@ -2,6 +2,7 @@ package config
 
 import (
 	"backend/internal/entity"
+	"backend/internal/migration"
 	"fmt"
 	"os"
 
@@ -21,6 +22,11 @@ func ConnectDatabase() {
 	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic("Failed to connect to database!")
+	}
+
+	// Run migrations
+	if err := migration.RunMigrations(); err != nil {
+		fmt.Printf("Error running migrations: %v\n", err)
 	}
 
 	// Auto-migrate with new fields
